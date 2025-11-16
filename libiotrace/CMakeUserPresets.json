@@ -1,0 +1,82 @@
+{
+    "version": 7,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 28,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "__base",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}/",
+            "hidden": true,
+            "cacheVariables": {
+                "ENABLE_REMOTE_CONTROL": false,
+                "FILENAME_RESOLUTION_ENABLED": true,
+                "HASH_FUNCTION": "MURMUR3_128",
+                "ENABLE_FILESYSTEM_METADATA": false,
+                "CMAKE_BUILD_TYPE": "Release",
+                "LOGGING": false
+            }
+        },
+        {
+            "name": "logfile",
+            "displayName": "[BUILD] Logfile",
+            "inherits": "__base",
+            "cacheVariables": {
+                "ENABLE_OUTPUT": "LOGFILE"
+            }
+        },
+        {
+            "name": "influx",
+            "displayName": "[BUILD] Influx",
+            "inherits": "__base",
+            "cacheVariables": {
+                "ENABLE_OUTPUT": "INFLUXDB"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "logfile",
+            "displayName": "[BUILD] Logfile",
+            "configurePreset": "logfile"
+        },
+        {
+            "name": "influx",
+            "displayName": "[BUILD] Influx",
+            "configurePreset": "influx"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "logfile",
+            "description": "[BUILD] Release: Configure + Build",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "logfile"
+                },
+                {
+                    "type": "build",
+                    "name": "logfile"
+                }
+            ]
+        },
+        {
+            "name": "influx",
+            "description": "[BUILD] Release: Configure + Build",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "influx"
+                },
+                {
+                    "type": "build",
+                    "name": "influx"
+                }
+            ]
+        }
+    ]
+}
