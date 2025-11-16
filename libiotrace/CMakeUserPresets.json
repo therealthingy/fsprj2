@@ -33,7 +33,8 @@
             "displayName": "[BUILD] Influx",
             "inherits": "__base",
             "cacheVariables": {
-                "ENABLE_OUTPUT": "INFLUXDB"
+                "ENABLE_OUTPUT": "INFLUXDB",
+                "SENDING": true
             }
         }
     ],
